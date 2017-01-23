@@ -2,7 +2,7 @@ public void setup()
 {
   String lines[] = loadStrings("palindromes.txt");
   println("there are " + lines.length + " lines");
-  for (int i=0; i < lines.length; i++) 
+  for (int i = 0; i < lines.length; i++) 
   {
     if(palindrome(lines[i])==true)
     {
@@ -16,37 +16,26 @@ public void setup()
 }
 public boolean palindrome(String word)
 {
-  String back = new String();
-  for(int i = 1; i < word.length()+1; i++)
+  String forward = new String("");
+  String backward = new String("");
+  for(int i = 0; i < word.length(); i++)
   {
-    String s = word.substring(word.length()-i, word.length()-i+1);
-    if(s.equals(" ") || s.equals("!") || s.equals(",") || s.equals(".") || s.equals("'"))
+    if(Character.isLetter(word.charAt(i)))
     {
-      back = back;
-    }
-    else
-    {
-      back = back + s;
+      forward = forward + word.substring(i, i+1);
     }
   }
-  String forward = new String();
-  for(int i = 1; i < word.length(); i++)
+  for(int i = 0; i < word.length(); i++)
   {
-    String s = word.substring(i,i+1);
-    if(s.equals(" ") || s.equals("!") || s.equals(",") || s.equals(".") || s.equals("'"))
+    if(Character.isLetter(word.charAt(word.length()-1-i)))
     {
-      forward = forward;
-    }
-    else
-    {
-      forward = forward + s;
+      backward = backward + word.substring(word.length()-1-i, word.length()-i);
     }
   }
-  if(back.equalsIgnoreCase(forward))
+  if(forward.equalsIgnoreCase(backward))
   {
     return true;
   }
   return false;
 }
-
 
